@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -301,6 +301,9 @@ GameObject:
   - component: {fileID: 229620600}
   - component: {fileID: 229620599}
   - component: {fileID: 229620598}
+  - component: {fileID: 229620604}
+  - component: {fileID: 229620603}
+  - component: {fileID: 229620602}
   m_Layer: 0
   m_Name: robot
   m_TagString: Untagged
@@ -374,6 +377,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &229620602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229620597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00bdde674c10af54493526dac805bb75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &229620603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229620597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8f0fdac779131409214f8f7cc43943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newLoc: {x: 0, y: 0, z: 0}
+  speed: 10
+  robot: {fileID: 229620601}
+  movetime: 0
+--- !u!114 &229620604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 229620597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3ce425bf22c0a438396fa414f830e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &381528319
 GameObject:
   m_ObjectHideFlags: 0
