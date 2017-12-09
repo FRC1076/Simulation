@@ -8,21 +8,37 @@ using System.Net.Sockets;
 using System.Threading;
 
 
-
 public class Networking : MonoBehaviour {
 
 	public static int listenPort = 8000;
 	public static bool messageReceived = false;
+	public static bool receiveString;
+
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Recieve Messages Before");
 		ReceiveMessages();
-		Debug.Log("ReceiveMessages should have run");
+		Debug.Log("Networking Start done");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (messageReceived)
+		{
+			// Parse the string into object
+			// SimulatorMessage sm = createObjectFromJson(receiveString);
 
+			messageReceived = false;
+
+			// if ((sm.sender == "frcsim") && (sm.message == "position")) {
+			//       send sm.position to the UnityRobot model
+			// }
+		}
+	}
+	public class SimulatorMessage
+	{
+		public string sender;
+		public string message;
+		// add more fields to the message (to guide json parse)
 	}
 	public class UdpState
 	{
@@ -40,7 +56,7 @@ public class Networking : MonoBehaviour {
 	  IPEndPoint e = (IPEndPoint)((UdpState)(ar.AsyncState)).endpoint;
 
 	  Byte[] receiveBytes = u.EndReceive(ar, ref e);
-	  string receiveString = Encoding.ASCII.GetString(receiveBytes);
+	  receiveString = Encoding.ASCII.GetString(receiveBytes);
 
 	  Console.WriteLine("Received: {0}", receiveString);
 	  messageReceived = true;
@@ -48,23 +64,23 @@ public class Networking : MonoBehaviour {
 
 	public static void ReceiveMessages()
 	{
-      Debug.Log("Start of Receive Messages Function")
-	  // Receive a message and write it to the console.
-	  IPEndPoint e = new IPEndPoint(IPAddress.Any, listenPort);
-	  UdpClient u = new UdpClient(e);
+		Debug.Log ("Networking.ReceiveMessages Start");
+	  	// Receive a message and write it to the console.
+	  	IPEndPoint e = new IPEndPoint(IPAddress.Any, listenPort);
+	  	UdpClient u = new UdpClient(e);
 
-	  UdpState s = new UdpState(u,e);
+	  	UdpState s = new UdpState(u,e);
 	  
 
-	  Console.WriteLine("listening for messages");
-	  u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
+	  	Console.WriteLine("listening for messages");
+	  	u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
 
-	  // Do some work while we wait for a message. For this example,
-	  // we'll just sleep
-	  while (!messageReceived)
-	  {
-	    Thread.Sleep(100);
-	  }
+	  	// Do some work while we wait for a message. For this example,
+	  	// we'll just sleep
+	  	while (!messageReceived)
+	  	{
+	    	Thread.Sleep(100);
+	  	}
 
 	}
 	
