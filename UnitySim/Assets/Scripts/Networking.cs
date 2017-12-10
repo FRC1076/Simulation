@@ -12,7 +12,7 @@ public class Networking : MonoBehaviour {
 
 	public static int listenPort = 8000;
 	public static bool messageReceived = false;
-	public static bool receiveString;
+	public static string receiveString;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +29,7 @@ public class Networking : MonoBehaviour {
 
 			messageReceived = false;
 
-			// if ((sm.sender == "frcsim") && (sm.message == "position")) {
+			// if ((sm.sender == "frcsim") && (sm.message == "move-to")) {
 			//       send sm.position to the UnityRobot model
 			// }
 		}
@@ -74,13 +74,6 @@ public class Networking : MonoBehaviour {
 
 	  	Console.WriteLine("listening for messages");
 	  	u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
-
-	  	// Do some work while we wait for a message. For this example,
-	  	// we'll just sleep
-	  	while (!messageReceived)
-	  	{
-	    	Thread.Sleep(100);
-	  	}
 
 	}
 	
