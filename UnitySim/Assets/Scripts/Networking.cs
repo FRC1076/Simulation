@@ -22,12 +22,16 @@ public class Networking : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (messageReceived)
-		{
+		if (messageReceived) {
 			// Parse the string into object
 			// SimulatorMessage sm = createObjectFromJson(receiveString);
 
+
+			Debug.Log ("Networking.Update() messageReceived");
+			Debug.Log (receiveString);
+
 			messageReceived = false;
+
 
 			// if ((sm.sender == "frcsim") && (sm.message == "move-to")) {
 			//       send sm.position to the UnityRobot model
