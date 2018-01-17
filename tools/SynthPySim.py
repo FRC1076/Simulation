@@ -8,8 +8,6 @@ import udp_channels as udp
 import json
 import time
 
-import pdb; pdb.set_trace()
-
 # set IP address accordingly.  (could be loopback if on the same host)
 UNITY_SIM_IP = '127.0.0.1'
 ROBOT_SIM_IP = '127.0.0.1'
