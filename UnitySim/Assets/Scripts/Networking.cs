@@ -30,19 +30,20 @@ public class Networking : MonoBehaviour {
 			Debug.Log ("Networking.Update() messageReceived");
 			Debug.Log (receiveString);
 
-			messageReceived = false;
-
 
 			// if ((sm.sender == "frcsim") && (sm.message == "move-to")) {
 			//       send sm.position to the UnityRobot model
 			// }
+
+			// Set up to receive the next message
+			ReceiveMessages();
 		}
 	}
 	public class SimulatorMessage
 	{
 		public string sender;
 		public string message;
-		// add more fields to the message (to guide json parse)
+		//  add the others here as well
 	}
 	public class UdpState
 	{
@@ -74,9 +75,13 @@ public class Networking : MonoBehaviour {
 	  	UdpClient u = new UdpClient(e);
 
 	  	UdpState s = new UdpState(u,e);
-	  
 
 	  	Console.WriteLine("listening for messages");
+
+	  	// clear the received state
+	  	messageReceived = false;
+
+	  	// install the callback for the next message
 	  	u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
 
 	}
