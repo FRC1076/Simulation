@@ -10,9 +10,10 @@ import time
 
 # set IP address accordingly.  (could be loopback if on the same host)
 UNITY_SIM_IP = '127.0.0.1'
+UNITY_LISTEN_PORT = 8000
 ROBOT_SIM_IP = '127.0.0.1'
 chan = udp.UDPChannel(ROBOT_SIM_IP, udp.UDPChannel.default_local_port,
-					  UNITY_SIM_IP, 8000)
+					  UNITY_SIM_IP, UNITY_LIST_PORT)
 
 x = 1.0
 y = 1.0
