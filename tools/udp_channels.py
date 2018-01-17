@@ -55,5 +55,9 @@ class UDPChannel:
         def receive_from(self):
                 """wait for timeout to receive a message from channel"""
                 self.receive_socket.settimeout(self.timeout_in_seconds)
-                return self.receive_socket.recvfrom(self.receive_buffer_size)
+                try:
+                    reply, server_address_info = self.receive_socket.recvfrom(self.receive_buffer_size)
+                    return reply, server_address_info
+                except socket.timeout:
+                    return None, None
 
