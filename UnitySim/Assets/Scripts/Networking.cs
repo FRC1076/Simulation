@@ -13,6 +13,7 @@ public class Networking : MonoBehaviour {
 	public static int listenPort = 8000;
 	public static bool messageReceived = false;
 	public static string receiveString;
+	public UdpState udp_state;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +37,7 @@ public class Networking : MonoBehaviour {
 			// }
 
 			// Set up to receive the next message
-			ReceiveMessages();
+			this.ReceiveMoreMessages();
 		}
 	}
 	public class SimulatorMessage
@@ -67,14 +68,14 @@ public class Networking : MonoBehaviour {
 	  messageReceived = true;
 	}
 
-	public static void ReceiveMessages()
+	public void ReceiveMessages()
 	{
 		Debug.Log ("Networking.ReceiveMessages Start");
 	  	// Receive a message and write it to the console.
 	  	IPEndPoint e = new IPEndPoint(IPAddress.Any, listenPort);
 	  	UdpClient u = new UdpClient(e);
 
-	  	UdpState s = new UdpState(u,e);
+	  	this.udp_state = new UdpState(u,e);
 
 	  	Console.WriteLine("listening for messages");
 
@@ -82,8 +83,13 @@ public class Networking : MonoBehaviour {
 	  	messageReceived = false;
 
 	  	// install the callback for the next message
-	  	u.BeginReceive(new AsyncCallback(ReceiveCallback), s);
+	  	u.BeginReceive(new AsyncCallback(ReceiveCallback), this.udp_state);
+	}
 
+	public void ReceiveMoreMessages()
+	{
+		messageReceived = false;
+		this.udp_state.client.BeginReceive(new AsyncCallback(ReceiveCallback), this.udp_state);
 	}
 	
 }
