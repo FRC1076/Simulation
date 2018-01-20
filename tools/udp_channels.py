@@ -43,9 +43,9 @@ class UDPChannel:
         def send_to(self, message):
                 """send message to the other end of the channel"""
                 self.send_socket.sendto(message, (self.remote_ip, self.remote_port))
-        def reply_to(self, message, (ip, port)):
+        def reply_to(self, message, dest):
                 """reply to a message from the other end of the channel."""
-                self.send_socket.sendto(message, (ip, port))
+                self.send_socket.sendto(message, dest)
 
         def receive_reply(self):
                 """receive a reply"""
