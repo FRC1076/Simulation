@@ -4,6 +4,32 @@ import socket
 #  Set receive from timeout to .001 seconds to avoid blocking for
 #  long.
 #
+#  Revised for python3 (requires decoding and encoding string
+#  automatically so user doesn't have to deal with it.
+#
+#
+def test_basic_function():
+    """Do basic back and forth to make sure things work"""
+    loc_chan = UDPChannel()
+    rem_chan = UDPChannel(local_port=UDPChannel.default_remote_port,
+                        remote_port=UDPChannel.default_local_port)
+
+    # test basic send/receive (and string encode/decode)
+    loc_chan.send_to("hello from local")
+    reply, sender = rem_chan.receive_from()
+    assert(reply == "hello from local")
+
+    # and the reverse just to be sure
+    rem_chan.send_to("hello from remote")
+    reply, sender = loc_chan.receive_from()
+    assert(reply == "hello from remote")
+
+    # test timeout
+    reply, sender = loc_chan.receive_from()
+    assert(reply == None and sender == None)
+
+
+
 class UDPChannel:
         """
         Create a communication channel to send and receive messages
@@ -42,22 +68,14 @@ class UDPChannel:
 
         def send_to(self, message):
                 """send message to the other end of the channel"""
-                self.send_socket.sendto(message, (self.remote_ip, self.remote_port))
-        def reply_to(self, message, dest):
-                """reply to a message from the other end of the channel."""
-                self.send_socket.sendto(message, dest)
-
-        def receive_reply(self):
-                """receive a reply"""
-                self.send_socket.settimeout(self.timeout_in_seconds)
-                return self.send_socket.recvfrom(self.receive_buffer_size)
+                self.send_socket.sendto(message.encode(), (self.remote_ip, self.remote_port))
 
         def receive_from(self):
                 """wait for timeout to receive a message from channel"""
                 self.receive_socket.settimeout(self.timeout_in_seconds)
                 try:
                     reply, server_address_info = self.receive_socket.recvfrom(self.receive_buffer_size)
-                    return reply, server_address_info
+                    return reply.decode(), server_address_info
                 except socket.timeout:
                     return None, None
 
