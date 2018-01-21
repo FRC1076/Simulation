@@ -26,8 +26,7 @@ def test_basic_function():
 
     # test timeout
     reply, sender = loc_chan.receive_from()
-    assert(reply == None and sender == None)
-
+    assert(reply == None and sender == (None,None))
 
 
 class UDPChannel:
@@ -77,5 +76,5 @@ class UDPChannel:
                     reply, server_address_info = self.receive_socket.recvfrom(self.receive_buffer_size)
                     return reply.decode(), server_address_info
                 except socket.timeout:
-                    return None, None
+                    return None, (None,None)
 
