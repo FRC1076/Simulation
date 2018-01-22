@@ -11,8 +11,9 @@ import time
 
 # set IP address accordingly.  (could be loopback if on the same host)
 UNITY_SIM_IP = '127.0.0.1'
+UNITY_LISTEN_PORT = 8000
 ROBOT_SIM_IP = '127.0.0.1'
-unity = udp.UDPChannel(UNITY_SIM_IP, udp.UDPChannel.default_remote_port,
+unity = udp.UDPChannel(UNITY_SIM_IP, UNITY_LISTEN_PORT, 
 					  ROBOT_SIM_IP, udp.UDPChannel.default_local_port)
 
 # see what Unity would receive

@@ -13,7 +13,7 @@ UNITY_SIM_IP = '127.0.0.1'
 UNITY_LISTEN_PORT = 8000
 ROBOT_SIM_IP = '127.0.0.1'
 chan = udp.UDPChannel(ROBOT_SIM_IP, udp.UDPChannel.default_local_port,
-					  UNITY_SIM_IP, UNITY_LIST_PORT)
+					  UNITY_SIM_IP, UNITY_LISTEN_PORT)
 
 x = 1.0
 y = 1.0
@@ -32,7 +32,7 @@ while x < 10.0:
 	}
 
 	message = json.dumps(transform)
-	print "Sending: " + message
+	print("Sending: {}".format(message))
 	chan.send_to(message)
 
 	# move a bit and wait for a second
