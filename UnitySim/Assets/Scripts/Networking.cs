@@ -30,11 +30,12 @@ public class Networking : MonoBehaviour {
 
 			Debug.Log ("Networking.Update() messageReceived");
 			Debug.Log (receiveString);
+			CRoot root = JsonUtility.FromJson<CRoot>(receiveString);
 
-
-			// if ((sm.sender == "frcsim") && (sm.message == "move-to")) {
-			//       send sm.position to the UnityRobot model
-			// }
+			if (root.message == "transform") {
+			    robot_move sn = gameObject.GetComponent<robot_move>();
+        		sn.forceMove(root.position);
+			}
 
 			// Set up to receive the next message
 			this.ReceiveMoreMessages();
@@ -92,4 +93,17 @@ public class Networking : MonoBehaviour {
 		this.udp_state.client.BeginReceive(new AsyncCallback(ReceiveCallback), this.udp_state);
 	}
 	
+}
+
+
+[System.Serializable]
+public class CRoot
+{
+	public string receiver;
+	public string sender;
+	public string message;
+	public Vector3 position;
+	public Vector2 orientation;
+
+
 }

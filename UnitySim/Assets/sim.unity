@@ -515,10 +515,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8f0fdac779131409214f8f7cc43943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newLoc: {x: 0, y: 0, z: 0}
   speed: 10
   robot: {fileID: 229620601}
-  movetime: 0
+  movetime: 2
 --- !u!114 &229620604
 MonoBehaviour:
   m_ObjectHideFlags: 0

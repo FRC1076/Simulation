@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 public class robot_move : MonoBehaviour {
-	public Vector3 newLoc;
+	//public Vector3 newLoc;
     public float speed = 10f;
     public Transform robot;
     public float movetime;
@@ -12,7 +12,7 @@ public class robot_move : MonoBehaviour {
         
 	}
 	
-	public void forceMove(){
+	public void forceMove(Vector3 newLoc){
 
 		
         StartCoroutine(MoveToPosition(robot, newLoc, movetime));
