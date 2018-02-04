@@ -99,11 +99,11 @@ public class Networking : MonoBehaviour {
 [System.Serializable]
 public class CRoot
 {
-	public string receiver;
-	public string sender;
-	public string message;
-	public Vector3 position;
-	public Vector2 orientation;
+	public string receiver { get; set; }
+	public string sender { get; set; }
+	public string message { get; set; }
+	public Vector3 position { get; set; }
+	public Vector2 orientation { get; set; }
 
 
 }
