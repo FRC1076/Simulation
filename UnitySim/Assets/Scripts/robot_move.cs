@@ -38,7 +38,7 @@ public class robot_move : MonoBehaviour {
        while(t < 1)
        {
              t += Time.deltaTime / timeToMove;
-             transform.position = Vector3.Lerp(currentPos, position, t);
+             transform.position = Vector3.Lerp(currentPos, currentPos + position, t);
              yield return null;
       }
     }

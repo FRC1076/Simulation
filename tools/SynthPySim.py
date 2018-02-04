@@ -20,7 +20,7 @@ y = 1.0
 z = 1.0
 
 # move along 9 units 1 second at a time
-while x < 10.0:
+while x < 2:
 
 	position = [ x, y, z ]
 	orientation = [ 1.0, 0.0 ]
