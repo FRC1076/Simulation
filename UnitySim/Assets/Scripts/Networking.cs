@@ -14,9 +14,11 @@ public class Networking : MonoBehaviour {
 	public static bool messageReceived = false;
 	public static string receiveString;
 	public UdpState udp_state;
-
+	
+	CRoot root;
 	// Use this for initialization
-	void Start () {
+	void Start (){
+		root = new CRoot();
 		ReceiveMessages();
 		Debug.Log("Networking Start done");
 	}
@@ -30,11 +32,33 @@ public class Networking : MonoBehaviour {
 
 			Debug.Log ("Networking.Update() messageReceived");
 			Debug.Log (receiveString);
-			CRoot root = JsonUtility.FromJson<CRoot>(receiveString);
+			
+			
 
+			//CRoot root = JsonUtility.FromJsonOverwrite<CRoot>(receiveString);
+			JsonUtility.FromJsonOverwrite(receiveString, root);
+			
+			
+
+			
+			//root.message = "transform";
+			//root.position = (20,5,1);
+			
+			
+			
 			if (root.message == "transform") {
 			    robot_move sn = gameObject.GetComponent<robot_move>();
-        		sn.forceMove(root.position);
+			    //Debug.Log(root.position);
+			    float xpos = (float)root.position[0];
+			    float ypos = (float)root.position[1];
+			    float zpos = (float)root.position[2];
+			    float xorient = (float)root.orientation[0];
+			    float yorient = (float)root.orientation[1];
+			    Vector3 pos = new Vector3(xpos, ypos, zpos);
+				Vector2 orien = new Vector2(xorient, yorient);
+			    //Vector3 testpos = new Vector3(20,5,1);
+        		sn.forceMove(pos);
+        		//Debug.Log(pos);
 			}
 
 			// Set up to receive the next message
@@ -96,14 +120,14 @@ public class Networking : MonoBehaviour {
 }
 
 
-[System.Serializable]
+
 public class CRoot
 {
-	public string receiver { get; set; }
-	public string sender { get; set; }
-	public string message { get; set; }
-	public Vector3 position { get; set; }
-	public Vector2 orientation { get; set; }
+	public string receiver;
+	public string sender;
+	public string message;
+	public List<double> position;
+	public List<double> orientation;
 
 
 }
