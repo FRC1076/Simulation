@@ -16,11 +16,11 @@ chan = udp.UDPChannel(ROBOT_SIM_IP, udp.UDPChannel.default_local_port,
 					  UNITY_SIM_IP, UNITY_LISTEN_PORT)
 
 x = 1.0
-y = 1.0
+y = 0.0 #Dont change, we dont want the robot to fly!
 z = 1.0
 
 # move along 9 units 1 second at a time
-while x < 2:
+while x < 10:
 
 	position = [ x, y, z ]
 	orientation = [ 1.0, 0.0 ]
