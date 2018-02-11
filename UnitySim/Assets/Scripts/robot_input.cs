@@ -48,7 +48,7 @@ public class robot_input : MonoBehaviour {
         if (Input.GetKey("m")){
         	
         	//sn.forceMove();
-            Debug.Log("DEPRETIATED");
+            Debug.Log("DEPRECIATED");
         }
 	}
 	// Update is called once per frame
