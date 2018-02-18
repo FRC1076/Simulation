@@ -13,16 +13,88 @@ public class Networking : MonoBehaviour {
 	public static int listenPort = 8000;
 	public static bool messageReceived = false;
 	public static string receiveString;
+	public GameObject robot;
 	public UdpState udp_state;
-	
+	public robot_move sn;
 	CRoot root;
 	// Use this for initialization
 	void Start (){
 		root = new CRoot();
 		ReceiveMessages();
 		Debug.Log("Networking Start done");
+		
+    	//Debug.Log("the robot should have rotated");
+		
+	}
+
+	void CheckType(){
+		if (root.message == "transform") {
+		    sn = gameObject.GetComponent<robot_move>();
+		    float xpos = (float)root.position[0];
+		    float ypos = (float)root.position[1];
+		    float zpos = (float)root.position[2];
+		    
+		    Vector3 pos = new Vector3(xpos, ypos, zpos);
+			
+		    //Vector3 testpos = new Vector3(20,5,1);
+    		sn.forceMove(pos);
+    		while(sn.finished == false){
+    			Debug.Log("1")
+    		}
+    		NextThing();
+    		//Debug.Log(pos);
+		}else if (root.message == "rotate") {
+			sn = gameObject.GetComponent<robot_move>();
+			Debug.Log("This Works");
+			Debug.Log(root.orientation[0]);
+			Debug.Log(root.orientation[1]);
+			sn = gameObject.GetComponent<robot_move>();
+			float angleOrient = (float)root.orientation[0];
+		    int timeOrient = (int)root.orientation[1];
+
+			StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
+			Debug.Log("This also Works");
+			while(sn.finished == false){
+    			Debug.Log("1")
+    		}
+    		NextThing();
+		}
+
 	}
 	
+
+	void NextThing(){
+		if (root.message == "transform") {
+		    sn = gameObject.GetComponent<robot_move>();
+		    float xpos = (float)root.position[0];
+		    float ypos = (float)root.position[1];
+		    float zpos = (float)root.position[2];
+		    
+		    Vector3 pos = new Vector3(xpos, ypos, zpos);
+			
+		    //Vector3 testpos = new Vector3(20,5,1);
+    		sn.forceMove(pos);
+    		while(sn.finished == false){
+    			Debug.Log("1")
+    		}
+    		NextThing();
+    		//Debug.Log(pos);
+		}else if (root.message == "rotate") {
+			sn = gameObject.GetComponent<robot_move>();
+			Debug.Log("This Works");
+			Debug.Log(root.orientation[0]);
+			Debug.Log(root.orientation[1]);
+			sn = gameObject.GetComponent<robot_move>();
+			float angleOrient = (float)root.orientation[0];
+		    int timeOrient = (int)root.orientation[1];
+
+			StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
+			Debug.Log("This also Works");
+			while(sn.finished == false){
+    			Debug.Log("1")
+    		}
+    		NextThing();
+	}
 	// Update is called once per frame
 	void Update () {
 		if (messageReceived) {
@@ -38,7 +110,7 @@ public class Networking : MonoBehaviour {
 			//CRoot root = JsonUtility.FromJsonOverwrite<CRoot>(receiveString);
 			JsonUtility.FromJsonOverwrite(receiveString, root);
 			
-			
+			CheckType();
 
 			
 			//root.message = "transform";
@@ -46,20 +118,7 @@ public class Networking : MonoBehaviour {
 			
 			
 			
-			if (root.message == "transform") {
-			    robot_move sn = gameObject.GetComponent<robot_move>();
-			    //Debug.Log(root.position);
-			    float xpos = (float)root.position[0];
-			    float ypos = (float)root.position[1];
-			    float zpos = (float)root.position[2];
-			    float xorient = (float)root.orientation[0];
-			    float yorient = (float)root.orientation[1];
-			    Vector3 pos = new Vector3(xpos, ypos, zpos);
-				Vector2 orien = new Vector2(xorient, yorient);
-			    //Vector3 testpos = new Vector3(20,5,1);
-        		sn.forceMove(pos);
-        		//Debug.Log(pos);
-			}
+			
 
 			// Set up to receive the next message
 			this.ReceiveMoreMessages();
@@ -127,7 +186,7 @@ public class CRoot
 	public string sender;
 	public string message;
 	public List<double> position;
-	public List<double> orientation;
+	public List<double> orientation; //Orientaition: (angle, speed)
 
 
 }
