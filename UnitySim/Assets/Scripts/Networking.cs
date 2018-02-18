@@ -50,7 +50,7 @@ public class Networking : MonoBehaviour {
 			    Vector3 pos = new Vector3(xpos, ypos, zpos);
 				
 			    //Vector3 testpos = new Vector3(20,5,1);
-	    		sn.forceMove(pos);
+	    		sn.MoveToPosition(pos);
 	    		
 	    		//Debug.Log(pos);
 			}else if (root.message == "rotate") {
