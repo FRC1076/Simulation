@@ -23,25 +23,25 @@ public class robot_input : MonoBehaviour {
             //Debug.Log(Time.deltaTime);
             //moveUp(speed);
             
-            sn.moveUp(speed);
             
+            Debug.Log("DEPRECIATED");
         }
         if (Input.GetKey("s"))
         {
             //pos.y -= panSpeed * Time.deltaTime;
-           
-            sn.moveDown(speed);
+           Debug.Log("DEPRECIATED");
+            // sn.moveDown(speed);
         }
         if (Input.GetKey("d"))
         {
             //pos.x += panSpeed * Time.deltaTime;
-            
-            sn.moveRight(speed);
+            Debug.Log("DEPRECIATED");
+            //sn.moveRight(speed);
         }
         if (Input.GetKey("a"))
         {
-        	
-            sn.moveLeft(speed);
+        	Debug.Log("DEPRECIATED");
+            //sn.moveLeft(speed);
             //pos.x -= panSpeed * Time.deltaTime;
         }
 
