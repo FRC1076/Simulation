@@ -16,13 +16,14 @@ public class Networking : MonoBehaviour {
 	public GameObject robot;
 	public UdpState udp_state;
 	public robot_move sn;
-	CRoot root;
+	public CRoot root;
 	// Use this for initialization
 	void Start (){
+		sn = gameObject.GetComponent<robot_move>();
 		root = new CRoot();
 		ReceiveMessages();
 		Debug.Log("Networking Start done");
-		
+		Debug.Log(sn.targetPosition);
     	//Debug.Log("the robot should have rotated");
 		
 	}
@@ -48,7 +49,7 @@ public class Networking : MonoBehaviour {
 			    float zpos = (float)root.position[2];
 			    
 			    Vector3 pos = new Vector3(xpos, ypos, zpos);
-				
+				sn.Movespeed = root.speed;
 			    //Vector3 testpos = new Vector3(20,5,1);
 	    		sn.MoveToPosition(pos);
 	    		
@@ -56,13 +57,13 @@ public class Networking : MonoBehaviour {
 			}else if (root.message == "rotate") {
 				sn = gameObject.GetComponent<robot_move>();
 				Debug.Log("This Works");
-				Debug.Log(root.orientation[0]);
+				Debug.Log(root.orientation[0]);//Angle
 				Debug.Log(root.orientation[1]);
 				sn = gameObject.GetComponent<robot_move>();
 				float angleOrient = (float)root.orientation[0];
-			    int timeOrient = (int)root.orientation[1];
-
-				sn.RotateRobot(angleOrient, timeOrient);
+			    int speedOrient = (int)root.orientation[1];
+			    sn.RotateSpeed = speedOrient;
+				sn.RotateRobot(angleOrient);
 				//Debug.Log("This also Works");
 				
 	    		
@@ -144,6 +145,6 @@ public class CRoot
 	public string message;
 	public List<double> position;
 	public List<double> orientation; //Orientaition: (angle, speed)
-
+	public int speed; //Speed of movement
 
 }

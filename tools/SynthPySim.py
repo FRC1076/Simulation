@@ -31,11 +31,13 @@ def Movmenet():
 
 	position = [ x, y, z ]
 	orientation = [ 1.0, 0.0 ]
+	speed = 5
 	transform = { "sender" : "synthetic robotpy",
 		"receiver" : "robot-1",	
 		"message" : "transform",
 		"position" : position,
-		"orientation" : orientation
+		"orientation" : orientation,
+		"speed": speed
 	}
 
 	message = json.dumps(transform)
@@ -48,13 +50,15 @@ def Movmenet():
 
 
 #rotate 90 degres in  5 seconds
-def rotation():
+def Rotation():
 		
-	orientation = [ 90.0, 5.0 ]
+	orientation = [ 90.0, 100.0 ]
+	speed = 5
 	rotate = { "sender" : "synthetic robotpy",
 		"receiver" : "robot-1",	
 		"message" : "rotate",
 		"orientation" : orientation
+		
 	}
 
 	message = json.dumps(rotate)
@@ -67,5 +71,5 @@ def rotation():
 
 
 Movmenet()
-rotation()
+Rotation()
 Movmenet()
