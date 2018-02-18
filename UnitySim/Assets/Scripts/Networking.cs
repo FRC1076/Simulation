@@ -39,7 +39,7 @@ public class Networking : MonoBehaviour {
 		    //Vector3 testpos = new Vector3(20,5,1);
     		sn.forceMove(pos);
     		while(sn.finished == false){
-    			Debug.Log("1")
+    			Debug.Log("1");
     		}
     		NextThing();
     		//Debug.Log(pos);
@@ -55,7 +55,7 @@ public class Networking : MonoBehaviour {
 			StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
 			Debug.Log("This also Works");
 			while(sn.finished == false){
-    			Debug.Log("1")
+    			Debug.Log("1");
     		}
     		NextThing();
 		}
