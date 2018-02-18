@@ -37,32 +37,42 @@ public class robot_move : MonoBehaviour {
 
 	public IEnumerator MoveToPosition(Transform transform, Vector3 offset, float timeToMove)
     {
-      finished = false;
+      // finished = false;
       var currentPos = transform.position;
-      var t = 0f;
-       while(t < 1)
-       {
-             t += Time.deltaTime / timeToMove;
-             transform.position = Vector3.Lerp(currentPos, currentPos + offset, t);
-             yield return null;
-      }
+      // var t = 0f;
+      //  while(t < 1)
+      //  {
+      //        t += Time.deltaTime / timeToMove;
+      //        transform.position = Vector3.Lerp(currentPos, currentPos + offset, t);
+      //        yield return null;
+      // }
 
-      finished = true;
-      //transform.position = currentPos + offset;
+      // finished = true;
+      transform.position = currentPos + offset;
+
+      yield return null;
     }
 
     public IEnumerator RotateRobot(float angle, int time){
-		finished = false;
+		// finished = false;
 		//Vector3 robotRotation = new Vector3(0, angle * 90, 0);
-		//transform.Rotate(robotRotation * (time * Time.deltaTime));
-		var t = 0f;
-		Quaternion targetRotation = transform.rotation * Quaternion.AngleAxis(angle, Vector3.up);
-		while(t < 1)
-		{
-			t += Time.deltaTime / time;
-			transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation , t);
-			yield return null;
-		}
-		finished = true;
+		// //transform.Rotate(robotRotation * (time * Time.deltaTime));
+		// var t = 0f;
+		// Quaternion targetRotation = transform.rotation * Quaternion.AngleAxis(angle, Vector3.up);
+		// while(t < 1)
+		// {
+		// 	t += Time.deltaTime / time;
+		// 	transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation , t);
+		// 	yield return null;
+		// }
+		// finished = true;
+
+		//We are currently teleporting to angle
+		transform.eulerAngles = new Vector3(
+			transform.eulerAngles.x,
+			transform.eulerAngles.y + angle,
+			transform.eulerAngles.z
+		);
+		yield return null;
     }
 }

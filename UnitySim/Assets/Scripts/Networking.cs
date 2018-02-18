@@ -27,75 +27,6 @@ public class Networking : MonoBehaviour {
 		
 	}
 
-	void CheckType(){
-		if (root.message == "transform") {
-		    sn = gameObject.GetComponent<robot_move>();
-		    float xpos = (float)root.position[0];
-		    float ypos = (float)root.position[1];
-		    float zpos = (float)root.position[2];
-		    
-		    Vector3 pos = new Vector3(xpos, ypos, zpos);
-			
-		    //Vector3 testpos = new Vector3(20,5,1);
-    		sn.forceMove(pos);
-    		while(sn.finished == false){
-    			Debug.Log("1");
-    		}
-    		NextThing();
-    		//Debug.Log(pos);
-		}else if (root.message == "rotate") {
-			sn = gameObject.GetComponent<robot_move>();
-			Debug.Log("This Works");
-			Debug.Log(root.orientation[0]);
-			Debug.Log(root.orientation[1]);
-			sn = gameObject.GetComponent<robot_move>();
-			float angleOrient = (float)root.orientation[0];
-		    int timeOrient = (int)root.orientation[1];
-
-			StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
-			Debug.Log("This also Works");
-			while(sn.finished == false){
-    			Debug.Log("1");
-    		}
-    		NextThing();
-		}
-
-	}
-	
-
-	void NextThing(){
-		if (root.message == "transform") {
-		    sn = gameObject.GetComponent<robot_move>();
-		    float xpos = (float)root.position[0];
-		    float ypos = (float)root.position[1];
-		    float zpos = (float)root.position[2];
-		    
-		    Vector3 pos = new Vector3(xpos, ypos, zpos);
-			
-		    //Vector3 testpos = new Vector3(20,5,1);
-    		sn.forceMove(pos);
-    		while(sn.finished == false){
-    			Debug.Log("1");
-    		}
-    		NextThing();
-    		//Debug.Log(pos);
-		}else if (root.message == "rotate") {
-			sn = gameObject.GetComponent<robot_move>();
-			Debug.Log("This Works");
-			Debug.Log(root.orientation[0]);
-			Debug.Log(root.orientation[1]);
-			sn = gameObject.GetComponent<robot_move>();
-			float angleOrient = (float)root.orientation[0];
-		    int timeOrient = (int)root.orientation[1];
-
-			StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
-			Debug.Log("This also Works");
-			while(sn.finished == false){
-    			Debug.Log("1");
-    		}
-    		NextThing();
-    	}
-	}
 	// Update is called once per frame
 	void Update () {
 		if (messageReceived) {
@@ -110,9 +41,34 @@ public class Networking : MonoBehaviour {
 
 			//CRoot root = JsonUtility.FromJsonOverwrite<CRoot>(receiveString);
 			JsonUtility.FromJsonOverwrite(receiveString, root);
-			
-			CheckType();
+			if (root.message == "transform") {
+			    sn = gameObject.GetComponent<robot_move>();
+			    float xpos = (float)root.position[0];
+			    float ypos = (float)root.position[1];
+			    float zpos = (float)root.position[2];
+			    
+			    Vector3 pos = new Vector3(xpos, ypos, zpos);
+				
+			    //Vector3 testpos = new Vector3(20,5,1);
+	    		sn.forceMove(pos);
+	    		
+	    		//Debug.Log(pos);
+			}else if (root.message == "rotate") {
+				sn = gameObject.GetComponent<robot_move>();
+				Debug.Log("This Works");
+				Debug.Log(root.orientation[0]);
+				Debug.Log(root.orientation[1]);
+				sn = gameObject.GetComponent<robot_move>();
+				float angleOrient = (float)root.orientation[0];
+			    int timeOrient = (int)root.orientation[1];
 
+				StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
+				//Debug.Log("This also Works");
+				
+	    		
+	    	}			
+			
+			//Debug.Log("The robot should have done something");
 			
 			//root.message = "transform";
 			//root.position = (20,5,1);
