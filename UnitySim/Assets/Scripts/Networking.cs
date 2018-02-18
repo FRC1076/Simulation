@@ -62,7 +62,7 @@ public class Networking : MonoBehaviour {
 				float angleOrient = (float)root.orientation[0];
 			    int timeOrient = (int)root.orientation[1];
 
-				StartCoroutine(sn.RotateRobot(angleOrient, timeOrient));
+				sn.RotateRobot(angleOrient, timeOrient);
 				//Debug.Log("This also Works");
 				
 	    		
