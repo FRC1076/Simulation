@@ -10,7 +10,7 @@ public class robot_input : MonoBehaviour {
     //public float movetime;
 	// Use this for initialization
 	void Start () {
-		sn = gameObject.GetComponent<robot_move>();
+		//sn = gameObject.GetComponent<robot_move>();
 		
 	}
 	public void checkInput(){
